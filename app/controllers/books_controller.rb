@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   def index
-    @book = Book.new
+    @book_temprate = Book.new
     @books = Book.all
   end
 
@@ -8,6 +8,7 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
     @book.user_id = current_user.id
     if @book.save
+     flash[:notice] = "New post successfully"
     redirect_to book_path(@book.id)
     else
       @books=Book.all
@@ -17,6 +18,8 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    @user_temprate = @book.user
+    @book_temprate = Book.new
   end
 
   def destroy
