@@ -1,15 +1,24 @@
+<%= flash[:notice] %>
+<% if book.errors.any? %>
+  <%= book.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= render 'list',book: @book_temprate,user: @user_temprate %>
 <h1>Books detail</h1>
 
 <div>
-  
+
 
   <p>title: <%= @book.title %></p>
   <p>Opinion: <%= @book.body %></p>
 
 
-  <%= link_to "edit", edit_book_path(@book.id) %>
+<%= link_to "edit",edit_book_path %>
 
   <% if @book.user == current_user %>
   <%= link_to "destroy",book_path(@book), method: :delete  %>

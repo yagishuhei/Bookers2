@@ -1,16 +1,22 @@
 
 <%= render 'list',book: @book_temprate,user: current_user %>
 
+<table>
+ <thead>
+   <tr>
+     <th>User image</th>
+     <th>Title</th>
+     <th>Opinion</th>
+   </tr>
+ </thead>
+
+  <tbody>
 <% @books.each do |book| %>
-<div>
-  <p><%= image_tag book.user.get_profile_image(100,100) %></p>
-  <p>Title: <%= book.title %></p>
-  <%= link_to book_path(book.id) do %>
-    <%= book.title %>
-  <% end %>
-  <p>Opinion: <%= book.body %></p>
-
-
-</div>
-
+ <tr>
+   <td><%= image_tag book.user.get_profile_image(100,100) %></td>
+   <td> <%= link_to book_path(book.id) do %><%= book.title %><% end %></td>
+   <td><%= book.body %></td>
+ </tr>
 <% end %>
+ </tbody>
+</table>

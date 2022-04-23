@@ -1,19 +1,21 @@
 
-<% if book.errors.any? %>
-<%= book.errors.count %>errors prohibited this obj from being saved:
-<ul>
-  <%= book.errors.full_messages.each do |message| %>
-  <li><%= message %></li>
-  <% end %>
-</ul>
+<% if books.errors.any? %>
+  <%= books.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% books.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
 <% end %>
 
 <h1>User info</h1>
 <%= image_tag user.get_profile_image(100,100) %>
-  <%= link_to user_path(user.id) do %>
-    <%= user.name  %>
-
+  <%= user.name %>
+  <%= user.introduction %>
+  <% if user == current_user %>
+    <span><%= link_to "プロフィール編集", edit_user_path(user) %></span>
   <% end %>
+
 
 <h1>New book</h1>
 

@@ -1,7 +1,9 @@
 class BooksController < ApplicationController
   def index
+    @book= Book.new(book_params)
     @book_temprate = Book.new
     @books = Book.all
+    @user =crrent_user
   end
 
   def create
@@ -29,7 +31,8 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @book =Book.find(params[:id])
+
+    @book= Book.find(params[:id])
   end
   def update
     @book= Book.find(params[:id])
@@ -40,6 +43,7 @@ class BooksController < ApplicationController
      render :index
    end
   end
+
 
   private
 
