@@ -20,6 +20,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @user_temprate = @book.user
     @book_temprate = Book.new
+
   end
 
   def destroy
@@ -37,7 +38,7 @@ class BooksController < ApplicationController
      redirect_to book_path(@book.id), notice: 'You have updated book successfully.'
    else
      @books=Book.all
-     render :index
+     render :edit
    end
   end
 

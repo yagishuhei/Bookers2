@@ -8,19 +8,59 @@
   </ul>
 <% end %>
 
-<%= render 'list',book: @book_temprate,user: @user_temprate %>
-<h1>Books detail</h1>
-
-<div>
 
 
-  <p>title: <%= @book.title %></p>
-  <p>Opinion: <%= @book.body %></p>
+<%= flash[:notice] %>
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
-
-<%= link_to "edit",edit_book_path %>
-
-  <% if @book.user == current_user %>
-  <%= link_to "destroy", book_path(@book), method: :delete  %>
-  <% end %>
+<div class="container">
+ <div class="row">
+  <div class="col-md-3">
+   <%= render 'list',book: @book_temprate,user: @user_temprate %>
+  </div>
+  <div class="col-md-8 ">
+   <h1>Books detail</h1>
+    <table class="table">
+     <thead>
+      <tr>
+       <th></th>
+   　　  <th></th>
+       <th></th>
+       <th colspan="2"></th>
+   　　</tr>
+　　 </thead>
+    <tbody>
+     <tr>
+      <td>
+       <%= link_to user_path(@book.user.id) do %>
+       <%= image_tag @book.user.get_profile_image(100,100) %>
+       <%= @book.user.name %>
+       <% end %>
+      </td>
+      <td>
+       <%= link_to book_path(@book.id) do %>
+       <%= @book.title %>
+       <% end %>
+      </td>
+      <td><%= @book.body %></td>
+      <% if @book.user == current_user %>
+      <td class="btn btn-sm btn-success edit_book_path">
+       <%= link_to "edit",edit_book_path(@book) %>
+       <% end %></td>
+     <% if @book.user == current_user %>
+     <td class="btn btn-sm btn-danger destroy_book_path">
+      <%= link_to "destroy", book_path(@book), method: :delete  %>
+      <% end %></td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
 </div>
+

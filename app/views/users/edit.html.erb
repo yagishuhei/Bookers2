@@ -1,14 +1,34 @@
-<h2>User info</h2>
-<%= form_with model: @user do |f| %>
-<label for="inputname">Name</label>
-<%= f.text_field :name, autofocus: true, id:"inputName",placeholder: "Name" %>
+<p><% if @user.errors.any? %>
+   <%= @user.errors.count %>errors prohibited this obj from being saved:
+   <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+   </ul>
+    <% end %>
+  </p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h2>User info</h2>
+       <%= form_with model: @user do |f| %>
+        <div class="form-group">
+          <label for="user_tname">Name</label>
+          <div><%= f.text_field :name %></div>
+        </div>
+        <div class="form-group">
+          <label for="user_Image">Image</label>
+          <div><%= f.file_field:profile_image %></div>
+        </div>
+        <div class="form-group">
+          <label for="inputintroduction">Introduction</label>
+          <div><%= f.text_area :introduction %></div>
+        </div>
+        <%= f.submit"Update User" %>
+        <% end %>
+      </div>
+   </div>
+</div>
 
-<label for="inputintroduction">Introduction</label>
-<%= f.text_area :introduction, autofocus: true, id:"inputintroduction",placeholder: "Introduction"%>
-
-<label for="inputImage">Image</label>
 
 
-<%= f.file_field:profile_image,placeholder:"Profile Image", accept: "image/*" %>
-<%= f.submit"Update User" %>
-<% end %>
