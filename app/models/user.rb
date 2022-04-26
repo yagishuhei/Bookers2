@@ -8,10 +8,9 @@ class User < ApplicationRecord
   has_one_attached :image
   has_one_attached :profile_image
 
-  validates :name,
-  length: {minimum: 2, maximum: 20 }
-  validates :introduction,
-  allow_blank: true, length: { minimum: 0, maximum: 50 }
+  validates :name, length: {minimum: 2, maximum: 20 }
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates :introduction, allow_blank: true, length: { minimum: 0, maximum: 50 }
 
 
 
