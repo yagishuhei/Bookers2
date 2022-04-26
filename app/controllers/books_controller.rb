@@ -2,6 +2,7 @@ class BooksController < ApplicationController
   def index
     @book_temprate = Book.new
     @books = Book.all
+
   end
 
   def create
@@ -31,6 +32,9 @@ class BooksController < ApplicationController
 
   def edit
     @book= Book.find(params[:id])
+    unless @book.user == current_user
+      redirect_to books_path
+    end
 
   end
 
