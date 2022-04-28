@@ -1,18 +1,18 @@
  <h2>User Info</h2>
 
- <%= image_tag user.get_profile_image(100,100) %>
-  <table class="table">
-<tbody>
-      <tr></tr>
-       <tr>
-         <th>name</th>
-         <th><%= user.name %></th>
-        </tr>
-         <tr>
-        <th>introduction</th>
-        <th><%= user.introduction %></th>
-        </tr>
-       </tbody>
+<%= image_tag user.get_profile_image(100,100) %>
+<table class="table">
+ <tbody>
+  <tr></tr>
+  <tr>
+   <th>name</th>
+   <th><%= user.name %></th>
+  </tr>
+  <tr>
+   <th>introduction</th>
+   <th><%= user.introduction %></th>
+  </tr>
+ </tbody>
 </table>
 <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
 <i class="fas fa-user-cog"></i>
@@ -20,22 +20,33 @@
 
 
 
-<p><% if book.errors.any? %>
-   <%= book.errors.count %>errors prohibited this obj from being saved:
-   <ul>
-    <% book.errors.full_messages.each do |message| %>
+<p>
+ <% if book.errors.any? %>
+  <%= book.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+   <% book.errors.full_messages.each do |message| %>
      <li><%= message %></li>
-    <% end %>
-   </ul>
    <% end %>
-  </p>
+  </ul>
+ <% end %>
+</p>
 
-  <h2 class="mt-3">New book</h2>
+<h2 class="mt-3">New book</h2>
+
 
   <%= form_with model: book do |f| %>
-      <h4>Title</h4>
-      <%= f.text_field:title %>
-      <h4>Opinion</h4>
-      <%= f.text_area:body %>
-      <%= f.submit nil, class: 'btn btn-success' %>
-  <% end %>
+
+  <div class="form-group">
+    <label for="book_title">Title</label>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label for="book_opinion">Opinion</label>
+    <%= f.text_area :body, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= f.submit nil, class: "btn btn-success" %>
+  </div>
+ <% end %>
